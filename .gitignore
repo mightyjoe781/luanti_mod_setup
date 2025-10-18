@@ -4,10 +4,11 @@
 # Allow top-level files you want tracked
 !*.yml
 !*.md
-!readme
+!*.sh
 !license
 !.gitignore
 !.github/
+!.vscode/
 
 # Allow folders you want tracked
 !config/
