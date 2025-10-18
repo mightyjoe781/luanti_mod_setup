@@ -1,0 +1,45 @@
+services:
+  luanti:
+    build: ./docker/
+    container_name: luanti
+    image: sudomoon/luanti_mod_setup
+    entrypoint: "/usr/local/bin/luantiserver --world /var/lib/luanti/worlds/prismo --config /minetest.conf"
+    restart: on-failure
+    user: root
+    environment:
+      - MINETEST_GAME_VERSION=5.5.1
+      - LUANTI_TAG=5.14.0
+      - MT_WORLD=prismo
+    volumes:
+      - "./mods:/var/lib/luanti/worlds/prismo/worldmods"
+      - "./config/world.mt:/var/lib/luanti/worlds/prismo/world.mt"
+      - "./config/minetest.conf:/minetest.conf"
+      - "prismo:/var/lib/luanti/worlds/prismo"
+    ports:
+      - 30000:30000/udp
+    networks:
+      - luanti
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: smk
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: prismo
+    # ports:
+    #   - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - luanti
+
+volumes:
+  prismo: {}
+  pgdata: {}
+
+networks:
+  luanti:
+    name: luanti
