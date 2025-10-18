@@ -1,0 +1,23 @@
+# Ignore everything by default
+/*
+
+# Allow top-level files you want tracked
+!*.yml
+!*.md
+!readme
+!license
+!.gitignore
+!.github/
+
+# Allow folders you want tracked
+!config/
+!docker/
+!mods/
+
+# Inside mods, ignore everything
+mods/*
+
+# But keep the greetings mod
+!mods/greetings/
+!mods/greetings/**
+!mods/mods_here.txt
