@@ -77,4 +77,5 @@ minetest.register_chatcommand("wiki", {
         return true
 	end
 })
+
 print("[OK] : Wiki Mod")
